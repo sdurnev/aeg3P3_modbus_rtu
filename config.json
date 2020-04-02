@@ -1,0 +1,12 @@
+{
+  "dev": "/dev/ttyUSB0",
+  "speed": 9600,
+  "databits": 8,
+  "parity": "E",
+  "stopbits": 1,
+  "timeout": 3000,
+  "id": 1,
+  "startreg": 1,
+  "quantity": 10,
+  "typeofreg": 1
+}

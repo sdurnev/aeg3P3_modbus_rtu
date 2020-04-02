@@ -1,0 +1,9 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Build All" type="CompoundRunConfigurationType">
+    <toRun name="aeg3P3_modbus_rtu_macos" type="GoApplicationRunConfiguration" />
+    <toRun name="aeg3P3_modbus_rtu_rpi" type="GoApplicationRunConfiguration" />
+    <toRun name="aeg3P3_modbus_rtu_windows" type="GoApplicationRunConfiguration" />
+    <toRun name="aeg3P3_modbus_rtu_x86" type="GoApplicationRunConfiguration" />
+    <method v="2" />
+  </configuration>
+</component>

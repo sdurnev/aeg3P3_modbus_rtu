@@ -1,0 +1,10 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="debug" type="GoApplicationRunConfiguration" factoryName="Go Application">
+    <module name="aeg3P3_modbus_rtu" />
+    <working_directory value="$PROJECT_DIR$/../aeg3P3_modbus_rtu/" />
+    <kind value="PACKAGE" />
+    <filePath value="$PROJECT_DIR$/aeg3p_modbus_rtu.go" />
+    <package value="aeg3P3_modbus_rtu" />
+    <method v="2" />
+  </configuration>
+</component>

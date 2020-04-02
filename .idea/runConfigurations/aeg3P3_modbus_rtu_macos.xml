@@ -1,0 +1,16 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="aeg3P3_modbus_rtu_macos" type="GoApplicationRunConfiguration" factoryName="Go Application">
+    <module name="aeg3P3_modbus_rtu" />
+    <working_directory value="$PROJECT_DIR$/../aeg3P3_modbus_rtu/" />
+    <envs>
+      <env name="GOOS" value="darwin" />
+      <env name="GOARCH" value="amd64" />
+    </envs>
+    <kind value="PACKAGE" />
+    <filePath value="$PROJECT_DIR$/aeg3p_modbus_rtu.go" />
+    <package value="aeg3P3_modbus_rtu" />
+    <output_directory value="$PROJECT_DIR$/../aeg3P3_modbus_rtu/bin/0.0.1/macos" />
+    <option name="run" value="false" />
+    <method v="2" />
+  </configuration>
+</component>
