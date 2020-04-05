@@ -1,7 +1,7 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="aeg3P3_modbus_rtu_x86" type="GoApplicationRunConfiguration" factoryName="Go Application">
     <module name="aeg3P3_modbus_rtu" />
-    <working_directory value="$PROJECT_DIR$/../aeg3P3_modbus_rtu/" />
+    <working_directory value="$PROJECT_DIR$/" />
     <envs>
       <env name="GOOS" value="linux" />
       <env name="GOARCH" value="amd64" />
@@ -9,7 +9,7 @@
     <kind value="PACKAGE" />
     <filePath value="$PROJECT_DIR$/aeg3p_modbus_rtu.go" />
     <package value="aeg3P3_modbus_rtu" />
-    <output_directory value="$PROJECT_DIR$/../aeg3P3_modbus_rtu/bin/0.0.1/linux" />
+    <output_directory value="$PROJECT_DIR$/bin/0.0.2/linux" />
     <option name="run" value="false" />
     <method v="2" />
   </configuration>
