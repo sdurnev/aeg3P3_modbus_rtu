@@ -21,4 +21,4 @@ Programm flags:
 
 Example:
 
-`aeg3P_modbus_rtu -serial=/dev/ttyRS485-1 -speed0=19200 -id=1 -q=10`
+`aeg3P3_modbus_rtu -serial=/dev/ttyRS485-1 -speed0=19200 -id=1 -q=10`
