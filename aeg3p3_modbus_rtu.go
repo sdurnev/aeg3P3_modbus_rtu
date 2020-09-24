@@ -14,7 +14,7 @@ import (
 !!!!!!!!!!!! VERSION !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 */
-const version = "0.0.2"
+const version = "0.0.3n"
 
 /*
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -133,76 +133,112 @@ func main() {
 	timeout := flag.Int("t", 3000, "an int")
 	typOfReg := flag.Int("type", 1, "an int")
 	regQuantity := flag.Uint("q", 86, "an uint")
+	requestType := flag.Bool("rtype", true, "a bool")
+	addressIP := flag.String("ip", "localhost", "a string")
+	tcpPort := flag.String("port", "502", "a string")
 	/*dataBits := flag.Int("dbits", 1, "a int")
 	parity := flag.String("parity", "E", "a string")
 	stopBits := flag.Int("sbits", 1, "an int")*/
 	flag.Parse()
+	tcpServerParam := fmt.Sprint(*addressIP, ":", *tcpPort)
 
-	handler := modbus.NewRTUClientHandler(fmt.Sprint(*serialPort))
-	handler.BaudRate = *serialSpeed
-	handler.SlaveId = byte(*slaveID)
-	handler.Timeout = time.Duration(*timeout) * time.Millisecond
-	/*handler.DataBits = int(*dataBits)
-	handler.Parity = fmt.Sprint(*parity)
-	handler.StopBits = *stopBits*/
+	if *requestType == true {
+		handler := modbus.NewTCPClientHandler(tcpServerParam)
+		handler.SlaveId = byte(*slaveID)
+		handler.Timeout = time.Duration(*timeout) * time.Millisecond
+		defer handler.Close()
+		client := modbus.NewClient(handler)
 
-	defer handler.Close()
-	client := modbus.NewClient(handler)
-
-	/**
-	Конфигурация для чтения параметров из json файла ./config.json
-	*/
-	/*		data, err := ioutil.ReadFile("./config.json")
-			if err != nil {
-				fmt.Print(err)
-			}
-			type Config struct {
-				DEV       string
-				SPEED     int
-				DATABITS  int
-				PARITY    string
-				STOPBITS  int
-				TIMEOUT   time.Duration
-				ID        int
-				STARTREG  int
-				QUANTITY  int
-				TYPEOFREG int
-			}
-			var conf Config
-			err = json.Unmarshal(data, &conf)
+		if *typOfReg == 1 {
+			results, err := client.ReadHoldingRegisters(uint16(1), uint16(*regQuantity))
 			if err != nil {
 				printError(err)
 			}
-
-			handler := modbus.NewRTUClientHandler(conf.DEV)
-			handler.BaudRate = conf.SPEED
-			handler.DataBits = conf.DATABITS
-			handler.Parity = conf.PARITY
-			handler.StopBits = conf.STOPBITS
-			handler.SlaveId = byte(conf.ID)
-			handler.Timeout = conf.TIMEOUT * time.Millisecond
-	*/
-	if *typOfReg == 1 {
-		results, err := client.ReadHoldingRegisters(uint16(1), uint16(*regQuantity))
-		if err != nil {
-			printError(err)
+			printResult(results)
+			/*fmt.Println(len(results))
+			fmt.Println(results)
+			os.Exit(0)*/
 		}
-		printResult(results)
-		/*fmt.Println(len(results))
-		fmt.Println(results)
-		os.Exit(0)*/
+
+		if *typOfReg == 2 {
+			results, err := client.ReadInputRegisters(uint16(1), uint16(*regQuantity))
+			if err != nil {
+				printError(err)
+			}
+			printResult(results)
+			/*fmt.Println(len(results))
+			fmt.Println(results)
+			os.Exit(0)*/
+		}
+
+	} else {
+		handler := modbus.NewRTUClientHandler(fmt.Sprint(*serialPort))
+		handler.BaudRate = *serialSpeed
+		handler.SlaveId = byte(*slaveID)
+		handler.Timeout = time.Duration(*timeout) * time.Millisecond
+		/*handler.DataBits = int(*dataBits)
+		handler.Parity = fmt.Sprint(*parity)
+		handler.StopBits = *stopBits*/
+
+		defer handler.Close()
+		client := modbus.NewClient(handler)
+
+		/**
+		Конфигурация для чтения параметров из json файла ./config.json
+		*/
+		/*		data, err := ioutil.ReadFile("./config.json")
+				if err != nil {
+					fmt.Print(err)
+				}
+				type Config struct {
+					DEV       string
+					SPEED     int
+					DATABITS  int
+					PARITY    string
+					STOPBITS  int
+					TIMEOUT   time.Duration
+					ID        int
+					STARTREG  int
+					QUANTITY  int
+					TYPEOFREG int
+				}
+				var conf Config
+				err = json.Unmarshal(data, &conf)
+				if err != nil {
+					printError(err)
+				}
+
+				handler := modbus.NewRTUClientHandler(conf.DEV)
+				handler.BaudRate = conf.SPEED
+				handler.DataBits = conf.DATABITS
+				handler.Parity = conf.PARITY
+				handler.StopBits = conf.STOPBITS
+				handler.SlaveId = byte(conf.ID)
+				handler.Timeout = conf.TIMEOUT * time.Millisecond
+		*/
+		if *typOfReg == 1 {
+			results, err := client.ReadHoldingRegisters(uint16(1), uint16(*regQuantity))
+			if err != nil {
+				printError(err)
+			}
+			printResult(results)
+			/*fmt.Println(len(results))
+			fmt.Println(results)
+			os.Exit(0)*/
+		}
+
+		if *typOfReg == 2 {
+			results, err := client.ReadInputRegisters(uint16(1), uint16(*regQuantity))
+			if err != nil {
+				printError(err)
+			}
+			printResult(results)
+			/*fmt.Println(len(results))
+			fmt.Println(results)
+			os.Exit(0)*/
+		}
 	}
 
-	if *typOfReg == 2 {
-		results, err := client.ReadInputRegisters(uint16(1), uint16(*regQuantity))
-		if err != nil {
-			printError(err)
-		}
-		printResult(results)
-		/*fmt.Println(len(results))
-		fmt.Println(results)
-		os.Exit(0)*/
-	}
 	fmt.Printf("{\"status\":\"error\", \"error\":\"typeofreg not 1 or 2 \"} \n")
 
 	/*var ttt = []byte{0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 244, 0, 226, 0, 225, 0, 225, 1, 244, 0, 230, 0, 229, 0, 229, 0, 243, 0, 0, 5, 220, 0, 100, 4, 86, 1, 244, 0, 219, 0, 6, 0, 1, 0, 1, 0, 219, 0, 19, 0, 2, 0, 1, 0, 219, 0, 43, 0, 4, 0, 4, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}

@@ -2,8 +2,14 @@
 <project version="4">
   <component name="SshConfigs">
     <configs>
-      <sshConfig authType="PASSWORD" host="192.168.255.46" id="bd993583-8f6d-4cb0-b79f-3590e621b688" port="22" customName="192.168.255.46" nameFormat="CUSTOM" username="root" />
-      <sshConfig authType="PASSWORD" host="192.168.255.46" id="55fffee2-5f36-4b54-a347-bef3d3f5c1a8" port="22" customName="192.168.255.46" nameFormat="CUSTOM" />
+      <sshConfig authType="PASSWORD" host="192.168.255.46" id="bd993583-8f6d-4cb0-b79f-3590e621b688" port="22" customName="192.168.255.46" nameFormat="CUSTOM" username="root">
+        <option name="customName" value="192.168.255.46" />
+      </sshConfig>
+      <sshConfig authType="PASSWORD" host="192.168.255.46" id="55fffee2-5f36-4b54-a347-bef3d3f5c1a8" port="22" customName="192.168.255.46" nameFormat="CUSTOM">
+        <option name="customName" value="192.168.255.46" />
+      </sshConfig>
+      <sshConfig host="10.0.0.20" id="ed026ca0-8e4d-4063-94ef-908f493ba6f5" keyPath="$USER_HOME$/.ssh/id_rsa" port="22" nameFormat="DESCRIPTIVE" username="root" />
+      <sshConfig host="10.0.0.28" id="43838f6c-67dc-487a-9373-e5371a81d5a9" keyPath="$USER_HOME$/.ssh/id_rsa" port="22" nameFormat="DESCRIPTIVE" username="root" />
     </configs>
   </component>
 </project>

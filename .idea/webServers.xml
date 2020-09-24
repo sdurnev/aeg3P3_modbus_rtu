@@ -3,11 +3,24 @@
   <component name="WebServers">
     <option name="servers">
       <webServer id="92aa9cc7-0578-450b-a2d4-b30bbf620c8b" name="192.168.255.46" url="http://192.168.255.46">
-        <fileTransfer host="192.168.255.46" port="22" accessType="SFTP">
+        <fileTransfer accessType="SFTP" host="192.168.255.46" port="22" sshConfigId="55fffee2-5f36-4b54-a347-bef3d3f5c1a8" sshConfig="192.168.255.46">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
           </advancedOptions>
-          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="96badf5d-dbae-4264-90a8-58f597a8c23c" name="wirenboard-AEBZUO3E">
+        <fileTransfer accessType="SFTP" host="10.0.0.20" port="22" sshConfigId="ed026ca0-8e4d-4063-94ef-908f493ba6f5" sshConfig="root@10.0.0.20:22 key" keyPair="true">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+      <webServer id="b267061e-c7c9-4064-91a1-6be51b319d00" name="wirenboard-AQSBVHKZ">
+        <fileTransfer accessType="SFTP" host="10.0.0.28" port="22" sshConfigId="43838f6c-67dc-487a-9373-e5371a81d5a9" sshConfig="root@10.0.0.28:22 key" keyPair="true">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
         </fileTransfer>
       </webServer>
     </option>
